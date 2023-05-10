@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7334C5F72A0B9AFF00FCF2BC /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334C5F62A0B9AFF00FCF2BC /* TabBarViewController.swift */; };
-		7334C5F92A0BAFEC00FCF2BC /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7334C5F82A0BAFEC00FCF2BC /* MainVC.swift */; };
 		734EAC7F2A02837E002DA18D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734EAC7E2A02837E002DA18D /* AppDelegate.swift */; };
 		734EAC812A02837E002DA18D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734EAC802A02837E002DA18D /* SceneDelegate.swift */; };
 		734EAC832A02837E002DA18D /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734EAC822A02837E002DA18D /* WelcomeVC.swift */; };
@@ -34,7 +33,6 @@
 
 /* Begin PBXFileReference section */
 		7334C5F62A0B9AFF00FCF2BC /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		7334C5F82A0BAFEC00FCF2BC /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		734EAC7B2A02837E002DA18D /* Forms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		734EAC7E2A02837E002DA18D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		734EAC802A02837E002DA18D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 				7378832D2A0432B0008349E5 /* Profile.swift */,
 				7378833C2A050149008349E5 /* CustomProfileTableViewCell.swift */,
 				7378833E2A051AA7008349E5 /* ResumeVC.swift */,
-				7334C5F82A0BAFEC00FCF2BC /* MainVC.swift */,
 				737883462A0B83F0008349E5 /* GenderVC.swift */,
 				737883442A0B832B008349E5 /* ResumeVCGenderDelegate.swift */,
 			);
@@ -233,7 +230,6 @@
 				734EAC812A02837E002DA18D /* SceneDelegate.swift in Sources */,
 				7378833D2A050149008349E5 /* CustomProfileTableViewCell.swift in Sources */,
 				737883222A03C628008349E5 /* JobListTableViewController.swift in Sources */,
-				7334C5F92A0BAFEC00FCF2BC /* MainVC.swift in Sources */,
 				737883342A0442EE008349E5 /* JobDetailsViewController.swift in Sources */,
 				737883322A043A70008349E5 /* DataBase.swift in Sources */,
 				7378833F2A051AA7008349E5 /* ResumeVC.swift in Sources */,
