@@ -46,6 +46,11 @@ class CustomProfileTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        for views in valueView.subviews{
+            views.removeFromSuperview()
+        }
+    }
     private func configureCellView(){
         self.selectionStyle = .none
         self.backgroundColor = .systemBackground

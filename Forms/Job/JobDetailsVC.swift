@@ -10,6 +10,8 @@ import UIKit
 class JobDetailsViewController: UITableViewController {
     
     var job : job?
+    var shouldShowCloseButton = false
+    var shouldShowApplyButton = true
     lazy var applyButton: UIButton = {
         let applyButton = UIButton()
         applyButton.setTitle("Apply", for: .normal)
@@ -19,7 +21,16 @@ class JobDetailsViewController: UITableViewController {
         applyButton.translatesAutoresizingMaskIntoConstraints = false
         return applyButton
     }()
-
+    
+    override var hidesBottomBarWhenPushed: Bool{
+        get{
+            return true
+        }
+        set{
+            super.hidesBottomBarWhenPushed = newValue
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Job Details"
@@ -28,15 +39,25 @@ class JobDetailsViewController: UITableViewController {
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
+        if shouldShowCloseButton{
+            configNavBarItems()
+        }
+    }
+    private func configNavBarItems(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonTapped))
+    }
+    @objc func closeButtonTapped(){
+        dismiss(animated: true)
     }
     @objc func applyButtonTapped(){
-        let resumeVC = ResumeVC()
+        let resumeVC = ViewController()
         resumeVC.job = job!
         navigationController?.pushViewController(resumeVC, animated: true)
     }
    
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard shouldShowApplyButton else { return nil }
         let footerView = UIView()
         
         applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
@@ -50,21 +71,6 @@ class JobDetailsViewController: UITableViewController {
         ])
         return footerView
     }
-    private func handleComplete(indexPath: IndexPath) {
-//        navigationController?.naviga
-    }
-//
-    
-    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let completion = UIContextualAction(style: .normal, title: "", handler:{
-            [weak self] (_, _, completionHandler) in
-            self?.handleComplete(indexPath: indexPath)
-            completionHandler(true)
-        })
-        completion.image = UIImage(systemName: "checkmark")
-        return UISwipeActionsConfiguration(actions: [completion])
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -80,7 +86,8 @@ class JobDetailsViewController: UITableViewController {
        return 44
     }
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        50
+        guard shouldShowApplyButton else { return 0 }
+        return 50
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,49 +113,4 @@ class JobDetailsViewController: UITableViewController {
         
         return cell
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

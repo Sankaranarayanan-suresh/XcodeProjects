@@ -25,7 +25,7 @@ class GenderVC: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate {
     convenience init(selectedValue: Gender){
         self.init(nibName: nil, bundle: nil)
         
-        var row: Int = selectedValue == .male ? 0 : selectedValue == .felmale ? 1 : 2
+        let row: Int = selectedValue == .male ? 0 : selectedValue == .felmale ? 1 : 2
         
         genderPicker.selectRow(row, inComponent: 0, animated: false)
     }
@@ -41,9 +41,12 @@ class GenderVC: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(genderPicker)
         configurePickerConstraints()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonTapped))
+    }
+    @objc func closeButtonTapped(){
+        dismiss(animated: true)
     }
     
     private func configurePickerConstraints(){

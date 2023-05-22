@@ -11,7 +11,7 @@ let content = "Lorem Ipsum is simply dummy text of the printing and typesetting 
 
 class WelcomeVC: UIViewController {
     lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [headingView, bodyContent,applyButton])
+        let stack = UIStackView(arrangedSubviews: [headingView, bodyContent])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.alignment = .center
@@ -42,51 +42,28 @@ class WelcomeVC: UIViewController {
         bodyContent.setContentHuggingPriority(.defaultLow, for: .vertical)
         return bodyContent
     }()
-    lazy var applyButton: UIButton = {
-        let applyButton = UIButton()
-        applyButton.setTitle("Continue", for: .normal)
-        applyButton.setTitleColor(.label, for: .normal)
-        applyButton.addTarget(self, action: #selector(didApplyButtonTap), for: .touchUpInside)
-        applyButton.backgroundColor = .systemPink.withAlphaComponent(0.7)
-        applyButton.layer.cornerRadius = 12
-        return applyButton
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Welcome"
+        title = "Home"
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
         view.addSubview(stackView)
         configureLayouts()
         
     }
-    @objc func didApplyButtonTap(){
-        navigationController?.pushViewController(JobListTableViewController(), animated: true)
-    }
-    @objc func profileButtonTapped(){
-        navigationController?.pushViewController(ProfileVC(), animated: true)
-    
-    }
     private func configureLayouts(){
         NSLayoutConstraint.activate([
-            
-            
-            
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 50),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
             
             headingView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            //            headingView.heightAnchor.constraint(equalToConstant: 40),
             
-            //            bodyContent.heightAnchor.constraint(equalToConstant: 100),
             bodyContent.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             
-            applyButton.heightAnchor.constraint(equalToConstant: 38),
-            applyButton.widthAnchor.constraint(equalToConstant: 100)
         ])
         
     }

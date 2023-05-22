@@ -7,15 +7,16 @@
 
 import UIKit
 
-class JobInfoCellTableViewCell: UITableViewCell {
+class AppliedJobListCell: UITableViewCell {
     
-    static var identifier = "JobInfoCellTableViewCell"
+    static var identifier = "AppliedJobListCell"
     
     lazy var jobImage: UIImageView = {
-        let jobImage = UIImageView(image: .init(named: "JobImage"))
+        let jobImage = UIImageView()
+        jobImage.layer.cornerRadius = 26
+        jobImage.clipsToBounds = true
         jobImage.contentMode = .scaleAspectFit
         jobImage.translatesAutoresizingMaskIntoConstraints = false
-        jobImage.backgroundColor = .clear
         jobImage.tintColor = .systemPink.withAlphaComponent(0.4)
         return jobImage
     }()
@@ -25,17 +26,15 @@ class JobInfoCellTableViewCell: UITableViewCell {
         jobTitle.textColor = .label
         jobTitle.textAlignment = .natural
         jobTitle.translatesAutoresizingMaskIntoConstraints = false
-        jobTitle.text = "Job Title"
         return jobTitle
     }()
-    lazy var jobDescription: UILabel = {
-        let jobDescription = UILabel()
-        jobDescription.textColor = .secondaryLabel
-        jobDescription.font = .systemFont(ofSize: 14)
-        jobDescription.textAlignment = .natural
-        jobDescription.translatesAutoresizingMaskIntoConstraints = false
-        jobDescription.text = "Job Description"
-        return jobDescription
+    lazy var profileEmail: UILabel = {
+        let profileEmail = UILabel()
+        profileEmail.textColor = .secondaryLabel
+        profileEmail.font = .systemFont(ofSize: 14)
+        profileEmail.textAlignment = .natural
+        profileEmail.translatesAutoresizingMaskIntoConstraints = false
+        return profileEmail
     }()
     lazy var companyName: UILabel = {
         let companyName = UILabel()
@@ -43,7 +42,6 @@ class JobInfoCellTableViewCell: UITableViewCell {
         companyName.font = .systemFont(ofSize: 10)
         companyName.textAlignment = .natural
         companyName.translatesAutoresizingMaskIntoConstraints = false
-        companyName.text = "Job Title"
         return companyName
     }()
     lazy var location: UILabel = {
@@ -52,7 +50,6 @@ class JobInfoCellTableViewCell: UITableViewCell {
         location.font = .systemFont(ofSize: 10)
         location.textAlignment = .natural
         location.translatesAutoresizingMaskIntoConstraints = false
-        location.text = "Job Title"
         return location
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -68,7 +65,7 @@ class JobInfoCellTableViewCell: UITableViewCell {
         self.accessoryType = .disclosureIndicator
         self.contentView.addSubview(jobImage)
         self.contentView.addSubview(jobTitle)
-        self.contentView.addSubview(jobDescription)
+        self.contentView.addSubview(profileEmail)
         self.contentView.addSubview(companyName)
         self.contentView.addSubview(location)
     }
@@ -78,28 +75,34 @@ class JobInfoCellTableViewCell: UITableViewCell {
             jobImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             jobImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             jobImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8),
-            jobImage.widthAnchor.constraint(equalTo: contentView.heightAnchor),
+            jobImage.widthAnchor.constraint(equalTo: contentView.heightAnchor,multiplier: 0.8),
             
             jobTitle.leadingAnchor.constraint(equalTo: jobImage.trailingAnchor, constant: 10),
             jobTitle.topAnchor.constraint(equalTo: jobImage.topAnchor),
            
-            jobDescription.topAnchor.constraint(equalTo: jobTitle.bottomAnchor),
-            jobDescription.leadingAnchor.constraint(equalTo: jobImage.trailingAnchor, constant: 10),
-            jobDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -2),
+            profileEmail.topAnchor.constraint(equalTo: jobTitle.bottomAnchor),
+            profileEmail.leadingAnchor.constraint(equalTo: jobImage.trailingAnchor, constant: 10),
+            profileEmail.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -2),
 //            jobDescription.widthAnchor.constraint(equalTo:)
             
-            companyName.topAnchor.constraint(equalTo: jobDescription.bottomAnchor),
+            companyName.topAnchor.constraint(equalTo: profileEmail.bottomAnchor),
             companyName.leadingAnchor.constraint(equalTo: jobImage.trailingAnchor, constant: 10),
             
-            location.topAnchor.constraint(equalTo: jobDescription.bottomAnchor),
+            location.topAnchor.constraint(equalTo: profileEmail.bottomAnchor),
             location.leadingAnchor.constraint(equalTo: companyName.trailingAnchor, constant: 4),
         ])
     }
     
-    func configureCell(_ jobObj : job){
-        self.jobTitle.text = jobObj.jobName
-        self.jobDescription.text = jobObj.jobDescription
-        self.companyName.text = jobObj.companyName
-        self.location.text = "(\(jobObj.location))"
+    func configureCell(_ jobObj : AppliedJob){
+        self.jobTitle.text = jobObj.job.jobName
+        self.profileEmail.text = jobObj.profile.email
+        self.companyName.text = jobObj.job.companyName
+        self.location.text = "(\(jobObj.job.location))"
+        if let image = jobObj.profile.profilePhoto {
+            jobImage.image = image
+        }else {
+            jobImage.image = UIImage(systemName: "person.crop.circle.fill.badge.checkmark")
+        }
     }
 }
+

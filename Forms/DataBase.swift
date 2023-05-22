@@ -12,6 +12,7 @@ class Database {
 
     var jobs = [job]()
     var profiles = [profile]()
+    var appliedJobs = [AppliedJob]()
     
     
     private init() {}

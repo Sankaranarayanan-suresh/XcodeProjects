@@ -43,5 +43,6 @@ struct profile {
         self.lastWorkedCompany = lastWorkedCompany
         self.currentCTC = currentCTC
         self.expectedCTC = expectedCTC
+        
     }
 }
